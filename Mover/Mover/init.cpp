@@ -2,6 +2,7 @@
 SDL_Window* mWindow = NULL;		//Main window
 SDL_Surface* mSurface = NULL;	//The surface of the main window
 SDL_Surface* secSurface = NULL;
+SDL_Renderer* mRenderer = NULL;
 
 SDL_Surface* loadSurface(string path)
 {
@@ -45,15 +46,25 @@ bool init()
 		}
 		else
 		{
-			int imgFlags = IMG_INIT_PNG;
-			if (!(IMG_Init(imgFlags) & imgFlags))
+			mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
+			if (mRenderer == NULL)
 			{
-				cout << "Error SDL_image: " << IMG_GetError() << endl;
-				success = 0;
+				cout << "Error renderer! Error: " << SDL_GetError() << endl;
 			}
 			else
 			{
-				mSurface = SDL_GetWindowSurface(mWindow);
+				SDL_SetRenderDrawColor(mRenderer, 255, 0, 0, 255);
+				
+				int imgFlags = IMG_INIT_PNG;
+				if (!(IMG_Init(imgFlags) & imgFlags))
+				{
+					cout << "Error SDL_image: " << IMG_GetError() << endl;
+					success = 0;
+				}
+				else
+				{
+					mSurface = SDL_GetWindowSurface(mWindow);
+				}
 			}
 		}
 	}
@@ -64,7 +75,7 @@ void close()
 {
 	SDL_FreeSurface(secSurface); //clear that surface for next use
 	secSurface = NULL;
-
+	SDL_DestroyRenderer(mRenderer);
 	SDL_DestroyWindow(mWindow);
 
 	SDL_Quit();

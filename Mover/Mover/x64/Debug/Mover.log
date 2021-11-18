@@ -1,2 +1,5 @@
-﻿  main.cpp
+﻿  init.cpp
+  main.cpp
+  window.cpp
+  Generating Code...
   Mover.vcxproj -> D:\GitHub\Mover\Mover\x64\Debug\Mover.exe
