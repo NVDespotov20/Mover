@@ -2,7 +2,6 @@
 
 void update()
 {
-
 	SDL_Rect stretchRect;
 	stretchRect.x = 0;
 	stretchRect.y = 0;
