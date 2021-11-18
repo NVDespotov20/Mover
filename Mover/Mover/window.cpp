@@ -16,7 +16,7 @@ void update()
 bool loadMedia()
 {
 	bool success = 1;
-	secSurface = loadSurface("images/test.png");
+	secSurface = loadSurface("images/bg.png");
 	if (secSurface == NULL)
 	{
 		cout << "Can't load image! Error: " << SDL_GetError() << endl;
