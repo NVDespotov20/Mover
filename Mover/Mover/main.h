@@ -19,4 +19,6 @@ bool init();
 
 bool loadMedia();
 
+void update();
+
 void close();

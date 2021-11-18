@@ -1,7 +1,6 @@
 #include "main.h"
 
 int main(int argc, char* args[])
-
 {
 	if (SDL_Init(SDL_INIT_VIDEO))
 	{
@@ -23,7 +22,6 @@ int main(int argc, char* args[])
 			{
 				bool quit = 0;							//quit check
 				SDL_Event e;							//Event variable
-
 				while (!quit)
 				{
 					while (SDL_PollEvent(&e) != 0)		//Checking that the event queue isn't empty
@@ -34,17 +32,10 @@ int main(int argc, char* args[])
 						}
 
 					}
-					SDL_Rect stretchRect;
-					stretchRect.x = 0;
-					stretchRect.y = 0;
-					stretchRect.w = scrWidth;
-					stretchRect.h = scrHeight;
-					SDL_BlitScaled(secSurface, NULL, mSurface, &stretchRect);
-					SDL_UpdateWindowSurface(mWindow);						//Update the window
+					update();
 				}
 			}
 		}
-		close();
 	}
 	return 0;
 }
