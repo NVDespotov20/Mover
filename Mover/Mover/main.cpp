@@ -8,34 +8,23 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		if (!init())
-		{
-			cout << "Failed to initialize!" << endl;
-		}
-		else
-		{
-			if (!loadMedia())
-			{
-				cout << "Failed to load media!" << endl;
-			}
-			else
-			{
-				bool quit = 0;							//quit check
-				SDL_Event e;							//Event variable
-				while (!quit)
-				{
-					while (SDL_PollEvent(&e) != 0)		//Checking that the event queue isn't empty
-					{
-						if (e.type == SDL_QUIT)         //If the current event is the X button
-						{
-							quit = 1;					//End the while loop
-						}
+		init();
+		loadMedia();
 
-					}
-					update();
+		bool quit = 0;							//quit check
+		SDL_Event e;							//Event variable
+		while (!quit)
+		{
+			while (SDL_PollEvent(&e) != 0)		//Checking that the event queue isn't empty
+			{
+				if (e.type == SDL_QUIT)         //If the current event is the X button
+				{
+					quit = 1;					//End the while loop and close SDL
+					close();
 				}
 			}
+			update();
 		}
+		return 0;
 	}
-	return 0;
 }

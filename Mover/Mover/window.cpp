@@ -2,12 +2,12 @@
 
 void update()
 {
-	SDL_Rect stretchRect;
-	stretchRect.x = 0;
-	stretchRect.y = 0;
-	stretchRect.w = scrWidth;
-	stretchRect.h = scrHeight;
-	SDL_BlitScaled(secSurface, NULL, mSurface, &stretchRect);
+	SDL_Rect mRect;
+	mRect.x = 0;
+	mRect.y = 0;
+	mRect.w = scrWidth;
+	mRect.h = scrHeight;
+	SDL_BlitScaled(secSurface, NULL, mSurface, &mRect);
 	SDL_UpdateWindowSurface(mWindow);						//Update the window
 
 }

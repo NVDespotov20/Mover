@@ -24,5 +24,3 @@ bool loadMedia();
 void update();
 
 void close();
-
-void coords(int x, int y);
