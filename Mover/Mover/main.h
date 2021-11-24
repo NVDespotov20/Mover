@@ -12,14 +12,15 @@ const int scrHeight = 704;
 extern SDL_Window* mWindow;		//Main window
 extern SDL_Surface* mSurface;	//The surface of the main window
 extern SDL_Surface* secSurface;		//A secondary surface
-extern SDL_Renderer* mRenderer;
+extern SDL_Renderer* renderer;
+extern SDL_Texture* t;
 
 SDL_Surface* loadSurface(string path);
 
 
 bool init();
 
-bool loadMedia();
+bool loadBackground();
 
 void update();
 

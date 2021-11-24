@@ -9,7 +9,7 @@ int main(int argc, char* args[])
 	else
 	{
 		init();
-		loadMedia();
+		loadBackground();
 
 		bool quit = 0;							//quit check
 		SDL_Event e;							//Event variable
