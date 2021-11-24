@@ -1,25 +1,28 @@
 #include "main.h"
+#include "objects.h"
 
+SDL_Texture* t = NULL;
 void update()
 {
-	SDL_Rect mRect;
-	mRect.x = 0;
-	mRect.y = 0;
-	mRect.w = scrWidth;
-	mRect.h = scrHeight;
-	SDL_BlitScaled(secSurface, NULL, mSurface, &mRect);
-	SDL_UpdateWindowSurface(mWindow);						//Update the window
+	SDL_RenderPresent(renderer);					//Update the window
 
 }
 
-bool loadMedia()
+bool loadBackground()
 {
 	bool success = 1;
 	secSurface = loadSurface("images/bg.png");
-	if (secSurface == NULL)
+	t = SDL_CreateTextureFromSurface(renderer, secSurface);
+	objRect t1(0, 0, scrWidth, scrHeight);
+	SDL_Rect *bRect = &t1.oRect;
+	if (t == NULL)
 	{
 		cout << "Can't load image! Error: " << SDL_GetError() << endl;
 		success = 0;
+	}
+	else
+	{
+		SDL_RenderCopy(renderer, t, NULL, &t1.oRect);
 	}
 	return success;
 }
