@@ -3,6 +3,8 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_image.h>
+#include "objects.h"
+
 
 
 using namespace std;
@@ -20,8 +22,11 @@ SDL_Surface* loadSurface(string path);
 
 bool init();
 
-bool loadBackground();
+SDL_Texture* loadTexture(string path, objRect t1);
 
 void update();
 
 void close();
+
+
+extern objRect background;

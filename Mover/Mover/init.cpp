@@ -4,6 +4,8 @@ SDL_Surface* mSurface = NULL;	//The surface of the main window
 SDL_Surface* secSurface = NULL;
 SDL_Renderer* renderer = NULL;
 
+objRect background(0, 0, scrWidth, scrHeight);
+
 SDL_Surface* loadSurface(string path)
 {
 	SDL_Surface* optimizedSurface = NULL;
@@ -73,7 +75,7 @@ bool init()
 
 void close()
 {
-	SDL_FreeSurface(secSurface); //clear that surface for next use
+	SDL_FreeSurface(secSurface); 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(mWindow);
 

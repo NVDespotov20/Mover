@@ -9,7 +9,7 @@ int main(int argc, char* args[])
 	else
 	{
 		init();
-		loadBackground();
+		loadTexture("images/bg.png", background);
 
 		bool quit = 0;							//quit check
 		SDL_Event e;							//Event variable

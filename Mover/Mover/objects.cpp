@@ -1,3 +1,4 @@
+#include "main.h"
 #include "objects.h"
 
 objRect::objRect(int x, int y, int w, int h)
