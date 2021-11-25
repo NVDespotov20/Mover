@@ -30,7 +30,6 @@ int main(int argc, char* args[])
 			}
 			update();
 		}
-		close();
 		return 0;
 	}
 }

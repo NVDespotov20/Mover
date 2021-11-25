@@ -22,8 +22,8 @@ void objRect::move(SDL_Event e)
 				{
 					loadTexture("images/bg.png", background);
 					player.oRect.y -= 64;
-					loadTexture("images/choveche/chovecheW.png", player);
 				}
+				loadTexture("images/choveche/chovecheW.png", player);
 				break;
 
 			case SDLK_s:
@@ -31,8 +31,8 @@ void objRect::move(SDL_Event e)
 				{
 					loadTexture("images/bg.png", background);
 					player.oRect.y += 64;
-					loadTexture("images/choveche/chovecheS.png", player);
 				}
+				loadTexture("images/choveche/chovecheS.png", player);
 				break;
 
 			case SDLK_a:
@@ -40,8 +40,8 @@ void objRect::move(SDL_Event e)
 				{
 					loadTexture("images/bg.png", background);
 					player.oRect.x -= 64;
-					loadTexture("images/choveche/chovecheA.png", player);
 				}
+				loadTexture("images/choveche/chovecheA.png", player);
 				break;
 
 			case SDLK_d:
@@ -49,9 +49,9 @@ void objRect::move(SDL_Event e)
 				{
 					loadTexture("images/bg.png", background);
 					player.oRect.x += 64;
-					loadTexture("images/choveche/chovecheD.png", player);
-					break;
 				}
+				loadTexture("images/choveche/chovecheD.png", player);
+				break;
 			default:
 				break;
 			}

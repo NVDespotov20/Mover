@@ -1,5 +1,2 @@
-﻿  main.cpp
-  window.cpp
-  Generating Code...
-D:\GitHub\Mover\Mover\Mover\main.cpp(36): warning C4715: 'SDL_main': not all control paths return a value
+﻿  objects.cpp
   Mover.vcxproj -> D:\GitHub\Mover\Mover\x64\Debug\Mover.exe
