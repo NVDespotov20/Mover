@@ -6,6 +6,11 @@ SDL_Renderer* renderer = NULL;
 
 objRect background(0, 0, scrWidth, scrHeight);
 
+objRect player(512, 192, 64, 64);
+
+
+int level_num = 1;
+
 SDL_Surface* loadSurface(string path)
 {
 	SDL_Surface* optimizedSurface = NULL;

@@ -5,7 +5,6 @@
 void update()
 {
 	SDL_RenderPresent(renderer);					//Update the window
-
 }
 
 SDL_Texture* loadTexture(string path, objRect t1)
@@ -16,10 +15,10 @@ SDL_Texture* loadTexture(string path, objRect t1)
 	if (t == NULL)
 	{
 		cout << "Can't load image! Error: " << SDL_GetError() << endl;
-		
 	}
 	else
 	{
+		SDL_SetTextureBlendMode(t, SDL_BLENDMODE_BLEND);
 		SDL_RenderCopy(renderer, t, NULL, &t1.oRect);
 	}
 	SDL_FreeSurface(secSurface);

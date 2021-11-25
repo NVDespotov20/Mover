@@ -10,21 +10,27 @@ int main(int argc, char* args[])
 	{
 		init();
 		loadTexture("images/bg.png", background);
-
+		loadTexture("images/choveche/chovecheW.png", player);
 		bool quit = 0;							//quit check
 		SDL_Event e;							//Event variable
 		while (!quit)
 		{
+			
 			while (SDL_PollEvent(&e) != 0)		//Checking that the event queue isn't empty
 			{
+
 				if (e.type == SDL_QUIT)         //If the current event is the X button
 				{
 					quit = 1;					//End the while loop and close SDL
-					close();
+				}
+				else if (e.type == SDL_KEYDOWN && e.key.repeat == 0)
+				{
+					player.move(e);
 				}
 			}
 			update();
 		}
+		close();
 		return 0;
 	}
 }

@@ -17,6 +17,8 @@ extern SDL_Surface* secSurface;		//A secondary surface
 extern SDL_Renderer* renderer;
 extern SDL_Texture* t;
 
+extern int level_num;
+
 SDL_Surface* loadSurface(string path);
 
 
@@ -30,3 +32,4 @@ void close();
 
 
 extern objRect background;
+extern objRect player;
