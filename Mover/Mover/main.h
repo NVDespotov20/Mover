@@ -24,7 +24,7 @@ SDL_Surface* loadSurface(string path);
 
 bool init();
 
-SDL_Texture* loadTexture(string path, objRect t1);
+void loadTexture(string path, objRect t1);
 
 void update();
 

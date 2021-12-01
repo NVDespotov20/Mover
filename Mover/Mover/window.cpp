@@ -7,7 +7,7 @@ void update()
 	SDL_RenderPresent(renderer);					//Update the window
 }
 
-SDL_Texture* loadTexture(string path, objRect t1)
+void loadTexture(string path, objRect t1)
 {
 	secSurface = loadSurface(path);
 	SDL_Texture* t = NULL;
@@ -23,7 +23,4 @@ SDL_Texture* loadTexture(string path, objRect t1)
 	}
 	SDL_FreeSurface(secSurface);
 	SDL_DestroyTexture(t);
-	return t;
-
-	
 }
