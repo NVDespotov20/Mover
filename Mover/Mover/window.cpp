@@ -22,5 +22,8 @@ SDL_Texture* loadTexture(string path, objRect t1)
 		SDL_RenderCopy(renderer, t, NULL, &t1.oRect);
 	}
 	SDL_FreeSurface(secSurface);
+	SDL_DestroyTexture(t);
 	return t;
+
+	
 }
