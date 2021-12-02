@@ -4,12 +4,9 @@ SDL_Surface* mSurface = NULL;	//The surface of the main window
 SDL_Surface* secSurface = NULL;
 SDL_Renderer* renderer = NULL;
 
-objRect background(0, 0, scrWidth, scrHeight);
+objRect background(coords(0), coords(0), scrWidth, scrHeight);
 
-objRect player(512, 192, 64, 64);
-
-
-int level_num = 1;
+objRect player(coords(7), coords(5), 64, 64);
 
 SDL_Surface* loadSurface(string path)
 {

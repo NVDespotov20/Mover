@@ -11,11 +11,17 @@ public:
 	
 };
 
-class level
-{
-	int lv[15] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};  // the level that is going to load
-	int _x, _y, _w, _h;
-	objRect pos;
-public:
-	void lvl();
-};
+
+void check_empty(int x_check, int y_check);
+
+
+bool lvl1();
+bool lvl2();
+bool lvl3();
+bool lvl4();
+bool lvl5();
+bool lvl6();
+bool lvl7();
+bool lvl8();
+bool lvl9();
+bool lvl10();

@@ -1,6 +1,5 @@
 #include "main.h"
 #include "objects.h"
-
 objRect::objRect(int x, int y, int w, int h)
 {
 	_x = x;
@@ -18,37 +17,39 @@ void objRect::move(SDL_Event e)
 			switch (e.key.keysym.sym)
 			{
 			case SDLK_w:
-				if (player.oRect.y != 0)
+				if (player.oRect.y != coords(0))
 				{
 					loadTexture("images/bg.png", background);
-					player.oRect.y -= 64;
+					//occupied[player.oRect.x / 64][player.oRect.y / 64] = false;
+					player.oRect.y -= coords(1);
+					//occupied[player.oRect.x / 64][player.oRect.y / 64] = true;
 				}
 				loadTexture("images/choveche/chovecheW.png", player);
 				break;
 
 			case SDLK_s:
-				if (player.oRect.y != 576)
+				if (player.oRect.y != coords(9))
 				{
 					loadTexture("images/bg.png", background);
-					player.oRect.y += 64;
+					player.oRect.y += coords(1);
 				}
 				loadTexture("images/choveche/chovecheS.png", player);
 				break;
 
 			case SDLK_a:
-				if (player.oRect.x != 0)
+				if (player.oRect.x != coords(0))
 				{
 					loadTexture("images/bg.png", background);
-					player.oRect.x -= 64;
+					player.oRect.x -= coords(1);
 				}
 				loadTexture("images/choveche/chovecheA.png", player);
 				break;
 
 			case SDLK_d:
-				if (player.oRect.x != 960)
+				if (player.oRect.x != coords(15))
 				{
 					loadTexture("images/bg.png", background);
-					player.oRect.x += 64;
+					player.oRect.x += coords(1);
 				}
 				loadTexture("images/choveche/chovecheD.png", player);
 				break;
@@ -57,22 +58,52 @@ void objRect::move(SDL_Event e)
 			}
 }
 
-void level::lvl()
+void check_empty(int x, int y)
 {
-	objRect pos(0, 0, 64, 64);
-	switch (lv[level_num])
-	{
-	case 1:
-	{	
-		objRect pos1(64, 64, 64, 64);
-		loadTexture("images/boxes/boxR.png", pos1);
 
-		objRect pos2(448, 320, 64, 64);
-		loadTexture("images/squares/squareR.png", pos2);
-	break;
-	}
-	default:
-		objRect pos0(0, 0, 64, 64);
-		break;
-	}
+}
+
+
+bool lvl1()
+{
+	player.oRect.x = coords(1);
+	player.oRect.y = coords(5);
+	loadTexture("images/choveche/chovecheW.png", player);
+	return 1;
+}
+bool lvl2()
+{
+	return 1;
+}
+bool lvl3()
+{
+	return 1;
+}
+bool lvl4()
+{
+	return 1;
+}
+bool lvl5()
+{
+	return 1;
+}
+bool lvl6()
+{
+	return 1;
+}
+bool lvl7()
+{
+	return 1;
+}
+bool lvl8()
+{
+	return 1;
+}
+bool lvl9()
+{
+	return 1;
+}
+bool lvl10()
+{
+	return 1;
 }

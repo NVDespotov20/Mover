@@ -10,7 +10,7 @@ int main(int argc, char* args[])
 	{
 		init();
 		loadTexture("images/bg.png", background);
-		loadTexture("images/choveche/chovecheW.png", player);
+		lvl1();
 		bool quit = 0;							//quit check
 		SDL_Event e;							//Event variable
 		while (!quit)

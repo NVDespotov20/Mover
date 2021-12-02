@@ -2,6 +2,22 @@
 #include "objects.h"
 
 
+int coords(int grid)
+{
+	return grid * 64;
+}
+
+void grid_reset()
+{
+	for (int i = 0; i < 16; i++)
+	{
+		for(int j = 0; j < 10; j++)
+		{
+			//occupied[i][j] = 0;
+		} 
+	}
+}
+
 void update()
 {
 	SDL_RenderPresent(renderer);					//Update the window

@@ -5,9 +5,9 @@
 #include <SDL_image.h>
 #include "objects.h"
 
-
-
 using namespace std;
+
+//int occupied[16][10];
 
 const int scrWidth = 1024;			//Constant screen sizes
 const int scrHeight = 704;
@@ -17,7 +17,6 @@ extern SDL_Surface* secSurface;		//A secondary surface
 extern SDL_Renderer* renderer;
 extern SDL_Texture* t;
 
-extern int level_num;
 
 SDL_Surface* loadSurface(string path);
 
@@ -30,6 +29,9 @@ void update();
 
 void close();
 
+void grid_reset();
+
+int coords(int grid);
 
 extern objRect background;
 extern objRect player;
