@@ -12,7 +12,7 @@ public:
 };
 
 
-void check_empty(int x_check, int y_check);
+bool check_empty(int x_check, int y_check, char direction);
 
 
 bool lvl1();

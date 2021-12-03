@@ -17,39 +17,112 @@ void objRect::move(SDL_Event e)
 			switch (e.key.keysym.sym)
 			{
 			case SDLK_w:
-				if (player.oRect.y != coords(0))
+				if (player.oRect.y != coords(0) && box.oRect.y != coords(0))
 				{
 					loadTexture("images/bg.png", background);
-					//occupied[player.oRect.x / 64][player.oRect.y / 64] = false;
+					occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
 					player.oRect.y -= coords(1);
-					//occupied[player.oRect.x / 64][player.oRect.y / 64] = true;
+					occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
+					if (player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+					{
+						box.oRect.y -= coords(1);
+						occupied[box.oRect.y / 64][box.oRect.x / 64] = 2;
+
+					}
+				}
+				else if (player.oRect.y != coords(0) && box.oRect.y == coords(0))
+				{
+					if (player.oRect.y != box.oRect.y && player.oRect.x != box.oRect.x)
+					{
+						loadTexture("images/bg.png", background);
+						occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
+						player.oRect.y -= coords(1);
+						occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
+					}
 				}
 				loadTexture("images/choveche/chovecheW.png", player);
 				break;
 
 			case SDLK_s:
-				if (player.oRect.y != coords(9))
+				if (player.oRect.y != coords(9) && box.oRect.y != coords(9))
 				{
 					loadTexture("images/bg.png", background);
+					occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
 					player.oRect.y += coords(1);
+					occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
+					if (player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+					{
+						loadTexture("images/bg.png", background);
+						box.oRect.y += coords(1);
+						occupied[box.oRect.y / 64][box.oRect.x / 64] = 2;
+
+					}
+				}
+				else if (player.oRect.y != coords(9) && box.oRect.x != coords(9))
+				{
+					if (player.oRect.y != box.oRect.y && player.oRect.x != box.oRect.x)
+					{
+						loadTexture("images/bg.png", background);
+						occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
+						player.oRect.y += coords(1);
+						occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
+					}
 				}
 				loadTexture("images/choveche/chovecheS.png", player);
 				break;
 
 			case SDLK_a:
-				if (player.oRect.x != coords(0))
+				if (player.oRect.x != coords(0) && box.oRect.x != coords(0))
 				{
 					loadTexture("images/bg.png", background);
+					occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
 					player.oRect.x -= coords(1);
+					occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
+					if (player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+					{
+						loadTexture("images/bg.png", background);
+						box.oRect.x -= coords(1);
+						occupied[box.oRect.y / 64][box.oRect.x / 64] = 2;
+
+					}
+				}
+				else if (player.oRect.y != coords(0) && box.oRect.y != coords(0))
+				{
+					if (player.oRect.y != box.oRect.y && player.oRect.x != box.oRect.x)
+					{
+						loadTexture("images/bg.png", background);
+						occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
+						player.oRect.x -= coords(1);
+						occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
+					}
 				}
 				loadTexture("images/choveche/chovecheA.png", player);
 				break;
 
 			case SDLK_d:
-				if (player.oRect.x != coords(15))
+				if (player.oRect.x != coords(15) && box.oRect.x != coords(15))
 				{
 					loadTexture("images/bg.png", background);
+					occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
 					player.oRect.x += coords(1);
+					occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
+					if (player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+					{
+						loadTexture("images/bg.png", background);
+						box.oRect.x += coords(1);
+						occupied[box.oRect.y / 64][box.oRect.x / 64] = 2;
+
+					}
+				}
+				else if (player.oRect.y != coords(15) && box.oRect.y != coords(15))
+				{
+					if (player.oRect.y != box.oRect.y && player.oRect.x != box.oRect.x)
+					{
+						loadTexture("images/bg.png", background);
+						occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
+						player.oRect.x += coords(1);
+						occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
+					}
 				}
 				loadTexture("images/choveche/chovecheD.png", player);
 				break;
@@ -58,10 +131,7 @@ void objRect::move(SDL_Event e)
 			}
 }
 
-void check_empty(int x, int y)
-{
-
-}
+//bool check_empty(int x, int y, char direction)
 
 
 bool lvl1()
@@ -69,6 +139,9 @@ bool lvl1()
 	player.oRect.x = coords(1);
 	player.oRect.y = coords(5);
 	loadTexture("images/choveche/chovecheW.png", player);
+	occupied[5][1] = 1;
+	loadTexture("images/boxes/boxY.png", box);
+	occupied[5][5] = 2; 
 	return 1;
 }
 bool lvl2()

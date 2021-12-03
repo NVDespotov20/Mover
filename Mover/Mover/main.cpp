@@ -26,6 +26,20 @@ int main(int argc, char* args[])
 				else if (e.type == SDL_KEYDOWN && e.key.repeat == 0)
 				{
 					player.move(e);
+					loadTexture("images/boxes/boxY.png", box);
+
+					for (int i = 0; i < 10; i++)
+					{
+						for (int j = 0; j < 16; j++)
+						{
+							cout << occupied[i][j] << " ";
+						}
+
+						cout << endl;
+					}
+					cout << endl;
+					cout << endl;
+					cout << endl;
 				}
 			}
 			update();

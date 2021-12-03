@@ -8,6 +8,8 @@ objRect background(coords(0), coords(0), scrWidth, scrHeight);
 
 objRect player(coords(7), coords(5), 64, 64);
 
+objRect box(coords(5), coords(5), 64, 64);
+
 SDL_Surface* loadSurface(string path)
 {
 	SDL_Surface* optimizedSurface = NULL;

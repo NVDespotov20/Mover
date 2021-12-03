@@ -7,7 +7,7 @@
 
 using namespace std;
 
-//int occupied[16][10];
+extern int occupied[10][16];
 
 const int scrWidth = 1024;			//Constant screen sizes
 const int scrHeight = 704;
@@ -35,3 +35,4 @@ int coords(int grid);
 
 extern objRect background;
 extern objRect player;
+extern objRect box;
