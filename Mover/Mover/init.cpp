@@ -9,6 +9,9 @@ objRect background(coords(0), coords(0), scrWidth, scrHeight);
 objRect player(coords(7), coords(5), 64, 64);
 
 objRect box(coords(5), coords(5), 64, 64);
+objRect square(coords(10), coords(6), 64, 64);
+
+int stamina = 100;
 
 SDL_Surface* loadSurface(string path)
 {
@@ -84,4 +87,72 @@ void close()
 	SDL_DestroyWindow(mWindow);
 
 	SDL_Quit();
+}
+
+void render(char direction)
+{
+	loadTexture("images/bg.png", background);
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 16; j++)
+		{
+			switch (grid[i][j])
+			{
+			case 1:
+				switch (direction)
+				{
+				case 'w':
+					loadTexture("images/choveche/chovecheW.png", player);
+					break;
+				case 's':
+					loadTexture("images/choveche/chovecheS.png", player);
+					break;
+				case 'a':
+					loadTexture("images/choveche/chovecheA.png", player);
+					break;
+				case 'd':
+					loadTexture("images/choveche/chovecheD.png", player);
+					break;
+				}
+				break;
+			case 2:
+				loadTexture("images/boxes/boxY.png", box);
+				break;
+			case 3:
+				loadTexture("images/boxes/boxG.png", box);
+				break;
+			case 4:
+				loadTexture("images/boxes/boxT.png", box);
+				break;
+			case 5:
+				loadTexture("images/boxes/boxR.png", box);
+				break;
+			case 6:
+				loadTexture("images/boxes/boxB.png", box);
+				break;
+			case 7:
+				loadTexture("images/boxes/box.png", box);
+				break;
+				/////////////////////////////////////////////
+			case 8:
+				loadTexture("images/boxes/squareY.png", square);
+				break;
+			case 9:
+				loadTexture("images/boxes/squareG.png", square);
+				break;
+			case 10:
+				loadTexture("images/boxes/squareT.png", square);
+				break;
+			case 11:
+				loadTexture("images/boxes/squareR.png", square);
+				break;
+			case 12:
+				loadTexture("images/boxes/squareB.png", square);
+				break;
+			case 13:
+				loadTexture("images/boxes/squareRB.png", square);
+				break;
+			}
+		}
+	}
 }

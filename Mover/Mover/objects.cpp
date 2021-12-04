@@ -1,5 +1,9 @@
 #include "main.h"
 #include "objects.h"
+
+int xEmpty;
+int yEmpty;
+char direct = 'd';
 objRect::objRect(int x, int y, int w, int h)
 {
 	_x = x;
@@ -14,187 +18,227 @@ objRect::objRect(int x, int y, int w, int h)
 
 void objRect::move(SDL_Event e)
 {	
-			switch (e.key.keysym.sym)
-			{
-			case SDLK_w:
-				if (player.oRect.y != coords(0) && check_empty(player.oRect.x, player.oRect.y - coords(1), 'w'))
-				{
-					loadTexture("images/bg.png", background);
-					occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
-					player.oRect.y -= coords(1);
-					occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
-				}
-				else if(player.oRect.y != coords(0) && box.oRect.y != coords(0) && !(check_empty(player.oRect.x ,player.oRect.y - coords(1), 'w')))
-				{
-					loadTexture("images/bg.png", background);
-					box_move('w');
-				}
-				loadTexture("images/choveche/chovecheW.png", player);
-				break;
+	switch (e.key.keysym.sym)
+	{
+	case SDLK_w:
+		direct = 'w';
+		if (player.oRect.y != coords(0) && check_empty(player.oRect.x, player.oRect.y, direct))
+		{
+			moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			player.oRect.y -= coords(1);
+		}
 
-			case SDLK_s:
-				if (player.oRect.y != coords(9) && check_empty(player.oRect.x, player.oRect.y + coords(1), 's'))
-				{
-					loadTexture("images/bg.png", background);
-					occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
-					player.oRect.y += coords(1);
-					occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
-				}
-				else if (player.oRect.y != coords(9) && box.oRect.y != coords(9) && !(check_empty(player.oRect.x, player.oRect.y + coords(1), 's')))
-				{
-					loadTexture("images/bg.png", background);
-					box_move('s');
-				}
-				loadTexture("images/choveche/chovecheS.png", player);
-				break;
+		break;
 
-			case SDLK_a:
-				if (player.oRect.x != coords(0) && check_empty(player.oRect.x - coords(1), player.oRect.y, 'a'))
-				{
-					loadTexture("images/bg.png", background);
-					occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
-					player.oRect.x -= coords(1);
-					occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
-				}
-				else if (player.oRect.x != coords(0) && box.oRect.x != coords(0) && !(check_empty(player.oRect.x - coords(1), player.oRect.y, 'a')))
-				{
-					loadTexture("images/bg.png", background);
-					box_move('a');
-				}
-				loadTexture("images/choveche/chovecheA.png", player);
-				break;
+	case SDLK_s:
+		direct = 's';
+		if (player.oRect.y != coords(9) && check_empty(player.oRect.x, player.oRect.y, direct))
+		{
+			moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			player.oRect.y += coords(1);
+		}
+		break;
 
-			case SDLK_d:
-				if (player.oRect.x != coords(15) && check_empty(player.oRect.x + coords(1), player.oRect.y, 'd'))
-				{
-					loadTexture("images/bg.png", background);
-					occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
-					player.oRect.x += coords(1);
-					occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
-				}
-				else if (player.oRect.x != coords(15) && box.oRect.x != coords(15) && !(check_empty(player.oRect.x + coords(1), player.oRect.y, 'd')))
-				{
-					loadTexture("images/bg.png", background);
-					box_move('d');
-				}
-				loadTexture("images/choveche/chovecheD.png", player);
-				break;
-			default:
-				break;
-			}
+	case SDLK_a:
+		direct = 'a';
+		if (player.oRect.x != coords(0) && check_empty(player.oRect.x, player.oRect.y, direct))
+		{
+			moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			player.oRect.x -= coords(1);
+		}
+		break;
+
+	case SDLK_d:
+		direct = 'd';
+		if (player.oRect.x != coords(15) && check_empty(player.oRect.x, player.oRect.y, direct))
+		{
+			moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			player.oRect.x += coords(1);
+		}
+		break;
+	}
 }
 
 bool check_empty(int x, int y, char direction)
 {
-	bool flag = 0;
-	switch (direction)
+	bool empty = 1;
+	if (grid[y][x] != 0 && coords(y) != coords(0) && coords(x) != coords(0) && coords(y) != coords(9) && coords(x) != coords(15))
 	{
-	case 'w':
-
-		if (occupied[y][x] == 0)
+		switch (grid[y][x])
 		{
-			flag = true;
+		case 2:
+			switch (direction)
+			{
+			case 'w':
+				check_empty(x, y - coords(1), direction);
+				break;
+			case 's':
+				check_empty(x, y + coords(1), direction);
+				break;
+			case 'a':
+				check_empty(x - coords(1), y, direction);
+				break;
+			case 'd':
+				check_empty(x + coords(1), y, direction);
+				break;
+			}
+			break;
+		case 3:
+			switch (direction)
+			{
+			case 'w':
+				check_empty(x, y - coords(1), direction);
+				break;
+			case 's':
+				check_empty(x, y + coords(1), direction);
+				break;
+			case 'a':
+				check_empty(x - coords(1), y, direction);
+				break;
+			case 'd':
+				check_empty(x + coords(1), y, direction);
+				break;
+			}
+			break;
+		case 4:
+			switch (direction)
+			{
+			case 'w':
+				check_empty(x, y - coords(1), direction);
+				break;
+			case 's':
+				check_empty(x, y + coords(1), direction);
+				break;
+			case 'a':
+				check_empty(x - coords(1), y, direction);
+				break;
+			case 'd':
+				check_empty(x + coords(1), y, direction);
+				break;
+			}
+			break;
+		case 5:
+			switch (direction)
+			{
+			case 'w':
+				check_empty(x, y - coords(1), direction);
+				break;
+			case 's':
+				check_empty(x, y + coords(1), direction);
+				break;
+			case 'a':
+				check_empty(x - coords(1), y, direction);
+				break;
+			case 'd':
+				check_empty(x + coords(1), y, direction);
+				break;
+			}
+			break;
+		case 6:
+			switch (direction)
+			{
+			case 'w':
+				check_empty(x, y - coords(1), direction);
+				break;
+			case 's':
+				check_empty(x, y + coords(1), direction);
+				break;
+			case 'a':
+				check_empty(x - coords(1), y, direction);
+				break;
+			case 'd':
+				check_empty(x + coords(1), y, direction);
+				break;
+			}
+			break;
 		}
-
-		break;
-	case 'd':
-
-		if (occupied[y][x] == 0)
+		switch (direction)
 		{
-			flag = true;
+		case 'w':
+			check_empty(x, y-coords(1), direction);
+			break;
+		case 's':
+			check_empty(x, y + coords(1), direction);
+			break;
+		case 'a':
+			check_empty(x - coords(1), y, direction);
+			break;
+		case 'd':
+			check_empty(x + coords(1), y, direction);
+			break;
 		}
-
-		break;
-	case 's':
-
-		if (occupied[y][x] == 0)
-		{
-			flag = true;
-		}
-
-		break;
-	case 'a':
-
-		if (occupied[y][x] == 0)
-		{
-			flag = true;
-		}
-
-		break;
 	}
+	else if(grid[y][x] == 0 && coords(y) != coords(0) && coords(x) != coords(0) && coords(y) != coords(9) && coords(x) != coords(15))
+	{
+		empty = 1;
+	}
+	else
+	{
+	empty = 0;
+ }
 
-	return flag;
+	if (empty == 1)
+	{
+		xEmpty = x;
+		yEmpty = y;
+	}
+	
+	return empty;
 }
 
-void box_move(char direction)
+void moveObj(int xCur, int yCur, int xDest, int yDest)
 {
-	switch (direction)
+	if (xCur >= 0 && xCur <= 15 && yCur >= 0 && yCur <= 9 && xDest >= 0 && xDest <= 15 && yDest >= 0 && yDest <= 9)
 	{
-	case 'w':
-
-		if (check_empty(box.oRect.x,box.oRect.y - coords(1),'w'))
-		{
-			occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
-			occupied[box.oRect.y / 64][box.oRect.x / 64] = 0;
-			box.oRect.y -= coords(1); 
-			player.oRect.y -= coords(1);
-			occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
-			occupied[box.oRect.y / 64][box.oRect.x / 64] = 2;
-		}
-
-		break;
-	case 'd':
-
-		if (check_empty(box.oRect.x + coords(1), box.oRect.y, 'd'))
-		{
-			occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
-			occupied[box.oRect.y / 64][box.oRect.x / 64] = 0;
-			box.oRect.x += coords(1);
-			player.oRect.x += coords(1);
-			occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
-			occupied[box.oRect.y / 64][box.oRect.x / 64] = 2;
-		}
-
-		break;
-	case 's':
-
-		if (check_empty(box.oRect.x, box.oRect.y + coords(1), 's'))
-		{
-			occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
-			occupied[box.oRect.y / 64][box.oRect.x / 64] = 0;
-			box.oRect.y += coords(1);
-			player.oRect.y += coords(1);
-			occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
-			occupied[box.oRect.y / 64][box.oRect.x / 64] = 2;
-		}
-
-		break;
-	case 'a':
-
-		if (check_empty(box.oRect.x - coords(1), box.oRect.y, 'a'))
-		{
-			occupied[player.oRect.y / 64][player.oRect.x / 64] = 0;
-			occupied[box.oRect.y / 64][box.oRect.x / 64] = 0;
-			box.oRect.x -= coords(1);
-			player.oRect.x -= coords(1);
-			occupied[player.oRect.y / 64][player.oRect.x / 64] = 1;
-			occupied[box.oRect.y / 64][box.oRect.x / 64] = 2;
-		}
-
-		break;
+		//if (xCur == xDest)
+		//{
+			if (yCur > yDest)
+			{
+				for (int i = yDest; i < yCur; i++)
+				{
+					grid[i][xCur] = grid[i + 1][xCur];
+				}
+			}
+			else
+			{
+				for (int i = yDest; i > yCur; i--)
+				{
+					grid[i][xCur] = grid[i - 1][xCur];
+				}
+			}
+		//}
+		//else if (yCur == yDest)
+		//{
+			if (xCur > xDest)
+			{
+				for (int i = xDest; i < yCur; i++)
+				{
+					grid[yCur][i] = grid[yCur][i + 1];
+				}
+			}
+			else
+			{
+				for (int i = xDest; i > yCur; i--)
+				{
+					grid[yCur][i] = grid[yCur][i - 1];
+				}
+			}
+		//}
+		grid[yCur][xCur] = 0;
 	}
 }
-
 
 
 bool lvl1()
 {
 	player.oRect.x = coords(1);
 	player.oRect.y = coords(5);
-	loadTexture("images/choveche/chovecheW.png", player);
-	occupied[5][1] = 1;
-	loadTexture("images/boxes/boxY.png", box);
-	occupied[5][5] = 2; 
+
+	grid[5][1] = 1;
+
+	grid[5][5] = 2; 
+
+	stamina = 50;
 	return 1;
 }
 bool lvl2()

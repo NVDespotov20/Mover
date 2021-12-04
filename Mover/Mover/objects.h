@@ -1,6 +1,10 @@
 #pragma once
 #include "main.h"
 
+extern int xEmpty;
+extern int yEmpty;
+
+
 class objRect 
 {
 	int _x, _y, _w, _h;
@@ -13,8 +17,7 @@ public:
 
 
 bool check_empty(int x, int y, char direction);
-void box_move(char direction);
-
+void moveObj(int xCur,int yCur, int xDest, int yDest);
 
 bool lvl1();
 bool lvl2();

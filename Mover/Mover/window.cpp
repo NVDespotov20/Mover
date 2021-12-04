@@ -7,7 +7,7 @@ int coords(int grid)
 	return grid * 64;
 }
 
-int occupied[10][16];
+int grid[10][16];
 
 void grid_reset()
 {
@@ -15,7 +15,7 @@ void grid_reset()
 	{
 		for(int j = 0; j < 16; j++)
 		{
-			occupied[i][j] = 0;
+			grid[i][j] = 0;
 		} 
 	}
 }
