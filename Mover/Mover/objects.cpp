@@ -22,44 +22,132 @@ void objRect::move(SDL_Event e)
 	{
 	case SDLK_w:
 		direct = 'w';
-		if (player.oRect.y != coords(0) && check_empty(player.oRect.x, player.oRect.y, direct))
+		if (player.oRect.y != coords(0))
 		{
-			moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			//moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			grid_fix_player(0);
 			player.oRect.y -= coords(1);
+			grid_fix_player(1);
+			moves('w');
 		}
 
 		break;
 
 	case SDLK_s:
 		direct = 's';
-		if (player.oRect.y != coords(9) && check_empty(player.oRect.x, player.oRect.y, direct))
+		if (player.oRect.y != coords(9))
 		{
-			moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			//moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			grid_fix_player(0);
 			player.oRect.y += coords(1);
+			grid_fix_player(1);
+			moves('s');
 		}
 		break;
 
 	case SDLK_a:
 		direct = 'a';
-		if (player.oRect.x != coords(0) && check_empty(player.oRect.x, player.oRect.y, direct))
+		if (player.oRect.x != coords(0))
 		{
-			moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			//moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			grid_fix_player(0);
 			player.oRect.x -= coords(1);
+			grid_fix_player(1);
+			moves('a');
 		}
 		break;
 
 	case SDLK_d:
 		direct = 'd';
-		if (player.oRect.x != coords(15) && check_empty(player.oRect.x, player.oRect.y, direct))
+		if (player.oRect.x != coords(15))
 		{
-			moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			//moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
+			grid_fix_player(0);
 			player.oRect.x += coords(1);
+			grid_fix_player(1);
+			moves('d');
 		}
 		break;
 	}
 }
 
-bool check_empty(int x, int y, char direction)
+void moves(char direction)
+{
+	switch(direction)
+	{
+	case 'w':
+		if (box.oRect.y != coords(0) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+		{
+			grid_fix_box(0);
+			box.oRect.y -= coords(1);
+			grid_fix_box(2);
+			grid_fix_player(1);
+		}
+		else if(box.oRect.y == coords(0) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+		{
+			player.oRect.y += coords(1);
+			grid_fix_box(2);
+			grid_fix_player(1);
+		}
+		break;
+	case 's':
+		if (box.oRect.y != coords(9) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+		{
+			grid_fix_box(0);
+			box.oRect.y += coords(1);
+			grid_fix_box(2);
+			grid_fix_player(1);
+		}
+		else if (box.oRect.y == coords(9) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+		{
+			player.oRect.y -= coords(1);
+			grid_fix_box(2);
+			grid_fix_player(1);
+		}
+		break;
+	case 'a':
+		if (box.oRect.x != coords(0) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+		{
+			grid_fix_box(0);
+			box.oRect.x -= coords(1);
+			grid_fix_box(2);
+			grid_fix_player(1);
+		}
+		else if (box.oRect.x == coords(0) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+		{
+			player.oRect.x += coords(1);
+			grid_fix_box(2);
+			grid_fix_player(1);
+		}
+		break;
+	case 'd':
+		if (box.oRect.x != coords(15) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+		{
+			grid_fix_box(0);
+			box.oRect.x += coords(1);
+			grid_fix_box(2);
+			grid_fix_player(1);
+		}
+		else if (box.oRect.x == coords(15) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
+		{
+			player.oRect.x -= coords(1);
+			grid_fix_box(2);
+			grid_fix_player(1);
+		}
+		break;
+	}
+}
+
+void grid_fix_box(int num)
+{
+	grid[box.oRect.y / 64][box.oRect.x / 64] = num;
+}
+void grid_fix_player(int num)
+{
+	grid[player.oRect.y / 64][player.oRect.x / 64] = num;
+}
+
+/*bool check_empty(int x, int y, char direction)
 {
 	bool empty = 1;
 	if (grid[y][x] != 0 && coords(y) != coords(0) && coords(x) != coords(0) && coords(y) != coords(9) && coords(x) != coords(15))
@@ -186,6 +274,7 @@ bool check_empty(int x, int y, char direction)
 	return empty;
 }
 
+
 void moveObj(int xCur, int yCur, int xDest, int yDest)
 {
 	if (xCur >= 0 && xCur <= 15 && yCur >= 0 && yCur <= 9 && xDest >= 0 && xDest <= 15 && yDest >= 0 && yDest <= 9)
@@ -226,7 +315,7 @@ void moveObj(int xCur, int yCur, int xDest, int yDest)
 		//}
 		grid[yCur][xCur] = 0;
 	}
-}
+}*/
 
 
 bool lvl1()

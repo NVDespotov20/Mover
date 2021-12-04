@@ -18,6 +18,9 @@ public:
 
 bool check_empty(int x, int y, char direction);
 void moveObj(int xCur,int yCur, int xDest, int yDest);
+void moves(char direction);
+void grid_fix_box(int num);
+void grid_fix_player(int num);
 
 bool lvl1();
 bool lvl2();
