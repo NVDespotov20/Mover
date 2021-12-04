@@ -12,7 +12,8 @@ public:
 };
 
 
-bool check_empty(int x_check, int y_check, char direction);
+bool check_empty(int x, int y, char direction);
+void box_move(char direction);
 
 
 bool lvl1();
