@@ -1,2 +1,3 @@
-﻿  init.cpp
-  Mover.vcxproj -> C:\Users\User\Documents\GitHub\Mover\Mover\x64\Debug\Mover.exe
+﻿  main.cpp
+D:\GitHub\Mover\Mover\Mover\main.cpp(49): warning C4715: 'SDL_main': not all control paths return a value
+  Mover.vcxproj -> D:\GitHub\Mover\Mover\x64\Debug\Mover.exe

@@ -92,8 +92,7 @@ void close()
 void render(char direction)
 {
 	loadTexture("images/bg.png", background);
-	loadTexture("images/choveche/chovecheW.png", player);
-	loadTexture("images/boxes/boxY.png", box);
+
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 16; j++)

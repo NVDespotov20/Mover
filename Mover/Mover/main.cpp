@@ -9,8 +9,8 @@ int main(int argc, char* args[])
 	else
 	{
 		init();
-		loadTexture("images/bg.png", background);
 		lvl1();
+		render(direct);
 		bool quit = 0;							//quit check
 		SDL_Event e;							//Event variable
 		direct = 'd';
