@@ -13,6 +13,7 @@ objRect square(coords(10), coords(6), 64, 64);
 
 int stamina = 100;
 
+
 SDL_Surface* loadSurface(string path)
 {
 	SDL_Surface* optimizedSurface = NULL;
@@ -136,22 +137,22 @@ void render(char direction)
 				break;
 				/////////////////////////////////////////////
 			case 8:
-				loadTexture("images/boxes/squareY.png", square);
+				loadTexture("images/squares/squareY.png", square);
 				break;
 			case 9:
-				loadTexture("images/boxes/squareG.png", square);
+				loadTexture("images/squares/squareG.png", square);
 				break;
 			case 10:
-				loadTexture("images/boxes/squareT.png", square);
+				loadTexture("images/squares/squareT.png", square);
 				break;
 			case 11:
-				loadTexture("images/boxes/squareR.png", square);
+				loadTexture("images/squares/squareR.png", square);
 				break;
 			case 12:
-				loadTexture("images/boxes/squareB.png", square);
+				loadTexture("images/squares/squareB.png", square);
 				break;
 			case 13:
-				loadTexture("images/boxes/squareRB.png", square);
+				loadTexture("images/squares/squareRB.png", square);
 				break;
 			}
 		}

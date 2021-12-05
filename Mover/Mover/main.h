@@ -41,5 +41,6 @@ extern objRect box;
 extern objRect square;
 
 extern int stamina;
+extern objRect Stamina;
 
 extern char direct;
