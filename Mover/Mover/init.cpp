@@ -23,7 +23,7 @@ objRect squareB(coords(10), coords(5), 64, 64);
 objRect squareRB(coords(10), coords(5), 64, 64);
 
 int stamina = 100;
-
+objRect Stamina(16, 656, 992, 36);
 
 SDL_Surface* loadSurface(string path)
 {
@@ -168,4 +168,92 @@ void render(char direction)
 			}
 		}
 	}
+
+
+	if (float(stamina * 2) / 100 == 1)
+	{
+		loadTexture("images/stamina bar states/sbFull.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.95 && float(stamina) / 100 < 0.99)
+	{
+		loadTexture("images/stamina bar states/sb20.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.90 && float(stamina) / 100 <= 0.94)
+	{
+		loadTexture("images/stamina bar states/sb19.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.85 && float(stamina) / 100 <= 0.89)
+	{
+		loadTexture("images/stamina bar states/sb18.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.80 && float(stamina) / 100 <= 0.84)
+	{
+		loadTexture("images/stamina bar states/sb17.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.75 && float(stamina) / 100 <= 0.79)
+	{
+		loadTexture("images/stamina bar states/sb16.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.70 && float(stamina) / 100 <= 0.74)
+	{
+		loadTexture("images/stamina bar states/sb15.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.65 && float(stamina) / 100 <= 0.69)
+	{
+		loadTexture("images/stamina bar states/sb14.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.60 && float(stamina) / 100 <= 0.64)
+	{
+		loadTexture("images/stamina bar states/sb13.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.55 && float(stamina) / 100 <= 0.59)
+	{
+		loadTexture("images/stamina bar states/sb12.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.50 && float(stamina) / 100 <= 0.54)
+	{
+		loadTexture("images/stamina bar states/sb11.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.45 && float(stamina) / 100 <= 0.49)
+	{
+		loadTexture("images/stamina bar states/sb10.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.40 && float(stamina) / 100 <= 0.44)
+	{
+		loadTexture("images/stamina bar states/sb9.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.35 && float(stamina) / 100 <= 0.39)
+	{
+		loadTexture("images/stamina bar states/sb8.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.30 && float(stamina) / 100 <= 0.34)
+	{
+		loadTexture("images/stamina bar states/sb7.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.25 && float(stamina) / 100 <= 0.29)
+	{
+		loadTexture("images/stamina bar states/sb6.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.20 && float(stamina) / 100 <= 0.24)
+	{
+		loadTexture("images/stamina bar states/sb5.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.15 && float(stamina) / 100 <= 0.19)
+	{
+		loadTexture("images/stamina bar states/sb4.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.10 && float(stamina) / 100 <= 0.14)
+	{
+		loadTexture("images/stamina bar states/sb3.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.05 && float(stamina) / 100 <= 0.09)
+	{
+		loadTexture("images/stamina bar states/sb2.png", Stamina);
+	}
+	else if (float(stamina * 2) / 100 >= 0.01 && float(stamina) / 100 <= 0.04)
+	{
+		loadTexture("images/stamina bar states/sb1.png", Stamina);
+	}
+
+
 }

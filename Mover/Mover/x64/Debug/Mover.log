@@ -1,8 +1,2 @@
-﻿  main.cpp
-  init.cpp
-  objects.cpp
-  window.cpp
-  Generating Code...
-C:\Users\User\Documents\GitHub\Mover\Mover\Mover\main.cpp(49): warning C4715: 'SDL_main': not all control paths return a value
-  LINK : C:\Users\User\Documents\GitHub\Mover\Mover\x64\Debug\Mover.exe not found or not built by the last incremental link; performing full link
-  Mover.vcxproj -> C:\Users\User\Documents\GitHub\Mover\Mover\x64\Debug\Mover.exe
+﻿  init.cpp
+  Mover.vcxproj -> D:\GitHub\Mover\Mover\x64\Debug\Mover.exe

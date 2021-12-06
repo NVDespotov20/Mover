@@ -39,8 +39,15 @@ int main(int argc, char* args[])
 					}
 					cout << endl;
 					cout << endl;
+					cout << "stamina: " << stamina << endl;
 					cout << endl;
 				}
+			}
+			if (stamina <= 0)
+			{
+				loadTexture("images/levelsBg/deathScreenBg.png", background);
+				SDL_Delay(1000);
+				lvl1();
 			}
 			update();
 		}

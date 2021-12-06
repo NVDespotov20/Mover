@@ -34,6 +34,7 @@ void objRect::move(SDL_Event e)
 			grid_fix_player(0);
 			player.oRect.y -= coords(1);
 			grid_fix_player(1);
+			stamina -= 1;
 		}
 		else if (player.oRect.y != coords(0) && grid[playerY - 1][playerX] != 0)
 		{
@@ -52,6 +53,7 @@ void objRect::move(SDL_Event e)
 			grid_fix_player(0);
 			player.oRect.y += coords(1);
 			grid_fix_player(1);
+			stamina -= 1;
 		}
 		else if (player.oRect.y != coords(9) && grid[playerY + 1][playerX] != 0)
 		{
@@ -70,6 +72,7 @@ void objRect::move(SDL_Event e)
 			grid_fix_player(0);
 			player.oRect.x -= coords(1);
 			grid_fix_player(1);
+			stamina -= 1;
 		}
 		else if (player.oRect.x != coords(0) && grid[playerY][playerX - 1] != 0)
 		{
@@ -87,6 +90,7 @@ void objRect::move(SDL_Event e)
 			grid_fix_player(0);
 			player.oRect.x += coords(1);
 			grid_fix_player(1);
+			stamina -= 1;
 		}
 		else if (player.oRect.x != coords(15) && grid[playerY][playerX + 1] != 0)
 		{
@@ -100,8 +104,6 @@ void objRect::move(SDL_Event e)
 
 void moves(char direction, int y, int x)
 {
-	bool flag = 0;
-
 	if (grid[y][x] != 0 && grid[y][x] != 1 && grid[y][x] != 7)
 	{
 		switch (direction)
@@ -115,7 +117,6 @@ void moves(char direction, int y, int x)
 				player.oRect.y -= coords(1);
 				grid_fix_player(1);
 				boxNum(boxColor, y - 1, x);
-				flag = 1;
 			}
 
 			break;
@@ -128,7 +129,6 @@ void moves(char direction, int y, int x)
 				player.oRect.y += coords(1);
 				grid_fix_player(1);
 				boxNum(boxColor, y + 1, x);
-				flag = 1;
 			}
 
 			break;
@@ -141,7 +141,6 @@ void moves(char direction, int y, int x)
 				player.oRect.x -= coords(1);
 				grid_fix_player(1);
 				boxNum(boxColor, y, x - 1);
-				flag = 1;
 			}
 
 			break;
@@ -154,7 +153,6 @@ void moves(char direction, int y, int x)
 				player.oRect.x += coords(1);
 				grid_fix_player(1);
 				boxNum(boxColor, y, x + 1);
-				flag = 1;
 			}
 			break;
 		}
@@ -204,22 +202,27 @@ void boxNum(int num, int y, int x)
 	case 2:
 		boxY.oRect.y = coords(y);
 		boxY.oRect.x = coords(x);
+		stamina -= 2;
 		break;
 	case 3:
 		boxG.oRect.y = coords(y);
 		boxG.oRect.x = coords(x);
+		stamina -= 3;
 		break;
 	case 4:
 		boxT.oRect.y = coords(y);
 		boxT.oRect.x = coords(x);
+		stamina -= 4;
 		break;
 	case 5:
 		boxR.oRect.y = coords(y);
 		boxR.oRect.x = coords(x);
+		stamina -= 5;
 		break;
 	case 6:
 		boxB.oRect.y = coords(y);
 		boxB.oRect.x = coords(x);
+		stamina -= 6;
 		break;
 	}
 }
@@ -254,18 +257,35 @@ void grid_fix_player(int num)
 bool lvl1()
 {
 	bool complete = 0;
+	grid_reset();
 	level = 1;
 	player.oRect.x = coords(1);
 	player.oRect.y = coords(5);
 
 	grid[5][1] = 1;
 	grid[5][5] = 2;
-	grid[5][6] = 3;
-	grid[5][7] = 4;
-	grid[5][8] = 5;
-	grid[5][9] = 6;
-	grid[5][10] = 8;
+	boxY.oRect.x = coords(5);
+	boxY.oRect.y = coords(5);
 
+	grid[5][6] = 3;
+	boxG.oRect.x = coords(6);
+	boxG.oRect.y = coords(5);
+
+	grid[5][7] = 4;
+	boxT.oRect.x = coords(7);
+	boxT.oRect.y = coords(5);
+
+	grid[5][8] = 5;
+	boxR.oRect.x = coords(8);
+	boxR.oRect.y = coords(5);
+
+	grid[5][9] = 6;
+	boxB.oRect.x = coords(9);
+	boxB.oRect.y = coords(5);
+
+	grid[5][10] = 8;
+	squareY.oRect.x = coords(10);
+	squareY.oRect.y = coords(5);
 	stamina = 50;
 	if (onSquare(boxY.oRect.y, boxY.oRect.x))
 	{
@@ -275,6 +295,7 @@ bool lvl1()
 }
 bool lvl2()
 {
+	level = 2;
 	bool complete = 0;
 	return complete;
 }
