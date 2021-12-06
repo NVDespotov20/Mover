@@ -21,7 +21,7 @@ objRect::objRect(int x, int y, int w, int h)
 	oRect.h = _h;
 }
 
-void objRect::move(SDL_Event e)
+void objRect::move(SDL_Event e)		//This moves the player on the screen
 {
 	switch (e.key.keysym.sym)
 	{
@@ -102,7 +102,7 @@ void objRect::move(SDL_Event e)
 }
 
 
-void moves(char direction, int y, int x)
+void moves(char direction, int y, int x)		//This moves the boxes
 {
 	if (grid[y][x] != 0 && grid[y][x] != 1 && grid[y][x] != 7)
 	{
@@ -244,10 +244,6 @@ bool onSquare(int y, int x)
 	return yes;
 }
 
-void grid_fix_box(int num)
-{
-	grid[box.oRect.y / 64][box.oRect.x / 64] = num;
-}
 void grid_fix_player(int num)
 {
 	grid[player.oRect.y / 64][player.oRect.x / 64] = num;
@@ -258,12 +254,14 @@ bool lvl1()
 {
 	bool complete = 0;
 	grid_reset();
-	level = 1;
-	player.oRect.x = coords(1);
-	player.oRect.y = coords(5);
+	level = 1;			//This sets the level code
 
+
+	player.oRect.x = coords(1); //This sets the player starting location on the grid and screen
+	player.oRect.y = coords(5);
 	grid[5][1] = 1;
-	grid[5][5] = 2;
+
+	grid[5][5] = 2;				//All of the lines below set the starting location on the grid and screen for the boxes
 	boxY.oRect.x = coords(5);
 	boxY.oRect.y = coords(5);
 
@@ -283,11 +281,11 @@ bool lvl1()
 	boxB.oRect.x = coords(9);
 	boxB.oRect.y = coords(5);
 
-	grid[5][10] = 8;
-	squareY.oRect.x = coords(10);
-	squareY.oRect.y = coords(5);
-	stamina = 50;
-	if (onSquare(boxY.oRect.y, boxY.oRect.x))
+	grid[5][10] = 13;			//This sets the starting location on the grid and screen for the square
+	squareRB.oRect.x = coords(10);
+	squareRB.oRect.y = coords(5);
+	stamina = 50;			//This sets the level stamina
+	if (onSquare(boxY.oRect.y, boxY.oRect.x))	//This checks if the level is completed or not
 	{
 		complete = 1;
 	}

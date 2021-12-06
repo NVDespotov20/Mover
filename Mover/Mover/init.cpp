@@ -8,7 +8,7 @@ objRect background(coords(0), coords(0), scrWidth, scrHeight);
 
 objRect player(coords(7), coords(5), 64, 64);
 
-objRect box(coords(5), coords(5), 64, 64);
+objRect box(coords(5), coords(5), 64, 64);		//Those initialise the objects
 objRect boxY(coords(5), coords(5), 64, 64);
 objRect boxG(coords(6), coords(5), 64, 64);
 objRect boxT(coords(7), coords(5), 64, 64);
@@ -22,7 +22,7 @@ objRect squareR(coords(10), coords(5), 64, 64);
 objRect squareB(coords(10), coords(5), 64, 64);
 objRect squareRB(coords(10), coords(5), 64, 64);
 
-int stamina = 100;
+int stamina = 100;					//This initialises the stamina variable and object
 objRect Stamina(16, 656, 992, 36);
 
 SDL_Surface* loadSurface(string path)
@@ -51,15 +51,15 @@ bool init()
 {
 	bool success = 1;
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)	////Initialising the SDL library
 	{
-		cout << "Error init: " << SDL_GetError() << endl;
+		cout << "Error init: " << SDL_GetError() << endl;	//If something goes wrong this will tell us what happened
 		success = 0;
 	}
 	else
 	{
 		mWindow = SDL_CreateWindow("Mover", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-			scrWidth, scrHeight, SDL_WINDOW_SHOWN);
+			scrWidth, scrHeight, SDL_WINDOW_SHOWN);			//Initialising the main window
 		if (mWindow == NULL)
 		{
 			cout << "Error window: " << SDL_GetError() << endl;
@@ -67,16 +67,16 @@ bool init()
 		}
 		else
 		{
-			renderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);
+			renderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED);	//Initialising the renderer
 			if (renderer == NULL)
 			{
 				cout << "Error renderer! Error: " << SDL_GetError() << endl;
 			}
 			else
 			{
-				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+				SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);	//Setting the default drawing color
 				
-				int imgFlags = IMG_INIT_PNG;
+				int imgFlags = IMG_INIT_PNG;	////Initialising the SDL_Image library
 				if (!(IMG_Init(imgFlags) & imgFlags))
 				{
 					cout << "Error SDL_image: " << IMG_GetError() << endl;
@@ -103,11 +103,11 @@ void close()
 
 void render(char direction)
 {
-	loadTexture("images/bg.png", background);
+	loadTexture("images/bg.png", background);	//Loads the background
 
 	for (int i = 0; i < 10; i++)
 	{
-		for (int j = 0; j < 16; j++)
+		for (int j = 0; j < 16; j++)	//This checks every grid[][] coordinates and renders the coresponding tile
 		{
 			switch (grid[i][j])
 			{
@@ -170,7 +170,7 @@ void render(char direction)
 	}
 
 
-	if (float(stamina * 2) / 100 == 1)
+	if (float(stamina * 2) / 100 == 1)			//This renders the difrent stamina states
 	{
 		loadTexture("images/stamina bar states/sbFull.png", Stamina);
 	}

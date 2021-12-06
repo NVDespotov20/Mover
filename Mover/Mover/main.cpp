@@ -2,15 +2,15 @@
 
 int main(int argc, char* args[])
 {
-	if (SDL_Init(SDL_INIT_VIDEO))
+	if (SDL_Init(SDL_INIT_VIDEO))	//Initialising SDL
 	{
 		cout << "ERROR: " << SDL_GetError() << endl;
 	}
 	else
 	{
-		init();
-		lvl1();
-		render(direct);
+		init();	//Initialising everything that has to be initialised
+		lvl1();	//Loads the first level
+		render(direct);	//Renders the frame
 		bool quit = 0;							//quit check
 		SDL_Event e;							//Event variable
 		direct = 'd';
@@ -24,32 +24,19 @@ int main(int argc, char* args[])
 				{
 					quit = 1;					//End the while loop and close SDL
 				}
-				else if (e.type == SDL_KEYDOWN && e.key.repeat == 0)
+				else if (e.type == SDL_KEYDOWN && e.key.repeat == 0)	//If the current event is a key press that happened only once
 				{
 					player.move(e);
 					render(direct);
-					for (int i = 0; i < 10; i++)
-					{
-						for (int j = 0; j < 16; j++)
-						{
-							cout << grid[i][j] << " ";
-						}
-
-						cout << endl;
-					}
-					cout << endl;
-					cout << endl;
-					cout << "stamina: " << stamina << endl;
-					cout << endl;
 				}
 			}
-			if (stamina <= 0)
+			if (stamina <= 0)	//Checks if the stamina is below zero
 			{
 				loadTexture("images/levelsBg/deathScreenBg.png", background);
 				SDL_Delay(1000);
-				lvl1();
+				lvl1();			//Restarts level 1
 			}
-			update();
+			update();	//Updates the frame
 		}
 		return 0;
 	}
