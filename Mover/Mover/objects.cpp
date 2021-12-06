@@ -5,6 +5,8 @@ int xEmpty;
 int yEmpty;
 char direct = 'd';
 int boxColor;
+int playerX;
+int playerY;
 
 objRect::objRect(int x, int y, int w, int h)
 {
@@ -22,15 +24,18 @@ void objRect::move(SDL_Event e)
 {	
 	switch (e.key.keysym.sym)
 	{
-	case SDLK_w:
+	case SDLK_w:;
 		direct = 'w';
-		if (player.oRect.y != coords(0))
+		playerX = player.oRect.x / 64;
+		playerY = player.oRect.y / 64;
+		if (player.oRect.y != coords(0) && grid[playerY - 1][playerX] == 0)
 		{
-			//moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
 			grid_fix_player(0);
-			boxColor = grid_check(grid[box.oRect.y / 64][box.oRect.x / 64]);
 			player.oRect.y -= coords(1);
 			grid_fix_player(1);
+		}
+		else if(player.oRect.y != coords(1) && grid[playerY - 1][playerX] != 0)
+		{
 			moves('w');
 		}
 
@@ -38,109 +43,153 @@ void objRect::move(SDL_Event e)
 
 	case SDLK_s:
 		direct = 's';
-		if (player.oRect.y != coords(9))
+		playerX = player.oRect.x / 64;
+		playerY = player.oRect.y / 64;
+		if (player.oRect.y != coords(9) && grid[playerY + 1][playerX] == 0)
 		{
-			//moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
 			grid_fix_player(0);
-			boxColor = grid_check(grid[box.oRect.y / 64][box.oRect.x / 64]);
 			player.oRect.y += coords(1);
 			grid_fix_player(1);
+		}
+		else if (player.oRect.y != coords(8) && grid[playerY + 1][playerX] != 0)
+		{
 			moves('s');
 		}
 		break;
 
 	case SDLK_a:
 		direct = 'a';
-		if (player.oRect.x != coords(0))
+		playerX = player.oRect.x / 64;
+		playerY = player.oRect.y / 64;
+		if (player.oRect.x != coords(0) && grid[playerY][playerX - 1] == 0)
 		{
-			//moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
 			grid_fix_player(0);
-			boxColor = grid_check(grid[box.oRect.y / 64][box.oRect.x / 64]);
 			player.oRect.x -= coords(1);
 			grid_fix_player(1);
+		}
+		else if (player.oRect.y != coords(1) && grid[playerY][playerX - 1] != 0)
+		{
 			moves('a');
 		}
 		break;
 
 	case SDLK_d:
 		direct = 'd';
-		if (player.oRect.x != coords(15))
+		playerX = player.oRect.x / 64;
+		playerY = player.oRect.y / 64;
+		if (player.oRect.x != coords(15) && grid[playerY][playerX + 1] == 0)
 		{
-			//moveObj(player.oRect.x, player.oRect.y, xEmpty, yEmpty);
 			grid_fix_player(0);
-			boxColor = grid_check(grid[box.oRect.y / 64][box.oRect.x / 64]);
 			player.oRect.x += coords(1);
 			grid_fix_player(1);
+		}
+		else if (player.oRect.y != coords(14) && grid[playerY][playerX + 1] != 0)
+		{
 			moves('d');
 		}
 		break;
 	}
 }
 
+
 void moves(char direction)
 {
-	switch(direction)
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 16; j++)
+		{
+			if (grid[i][j] != 0 && grid[i][j] != 1 && grid[i][j] != 7)
+			{
+				switch (direction)
+				{
+				case 'w':
+
+					if (player.oRect.y != coords(1))
+					{
+						fix(i, j, 'w');
+						grid_fix_player(0);
+						player.oRect.y -= coords(1);
+						grid_fix_player(1);
+						boxNum(2, i - 1, j);
+					}
+
+					break;
+				case 's':
+
+					if (player.oRect.y != coords(8))
+					{
+						fix(i, j, 's');
+						grid_fix_player(0);
+						player.oRect.y += coords(1);
+						grid_fix_player(1);
+						boxNum(2, i + 1, j);
+					}
+
+					break;
+				case 'a':
+
+					if (player.oRect.x != coords(1))
+					{
+						fix(i, j, 'a');
+						grid_fix_player(0);
+						player.oRect.x -= coords(1);
+						grid_fix_player(1);
+						boxNum(2, i, j - 1);
+					}
+
+					break;
+				case 'd':
+
+					if (player.oRect.x != coords(14))
+					{
+						fix(i, j, 'd');
+						grid_fix_player(0);
+						player.oRect.x += coords(1);
+						grid_fix_player(1);
+						boxNum(2, i, j + 1);
+					}
+
+					break;
+				}
+			}
+		}
+	}
+}
+
+void fix(int y, int x, char direction)
+{
+	switch (direction)
 	{
 	case 'w':
-		if (box.oRect.y != coords(0) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
-		{
-			
-			grid_fix_box(0);
-			box.oRect.y -= coords(1);
-			grid_fix_box(boxColor);
-			grid_fix_player(1);
-		}
-		else if(box.oRect.y == coords(0) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
-		{
-			player.oRect.y += coords(1);
-			grid_fix_box(boxColor);
-			grid_fix_player(1);
-		}
+
+		grid[y - 1][x] = grid[y][x];
+
 		break;
 	case 's':
-		if (box.oRect.y != coords(9) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
-		{
-			grid_fix_box(0);
-			box.oRect.y += coords(1);
-			grid_fix_box(boxColor);
-			grid_fix_player(1);
-		}
-		else if (box.oRect.y == coords(9) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
-		{
-			player.oRect.y -= coords(1);
-			grid_fix_box(boxColor);
-			grid_fix_player(1);
-		}
+
+		grid[y + 1][x] = grid[y][x];
+
 		break;
 	case 'a':
-		if (box.oRect.x != coords(0) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
-		{
-			grid_fix_box(0);
-			box.oRect.x -= coords(1);
-			grid_fix_box(boxColor);
-			grid_fix_player(1);
-		}
-		else if (box.oRect.x == coords(0) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
-		{
-			player.oRect.x += coords(1);
-			grid_fix_box(boxColor);
-			grid_fix_player(1);
-		}
+
+		grid[y][x - 1] = grid[y][x];
+
 		break;
 	case 'd':
-		if (box.oRect.x != coords(15) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
-		{
-			grid_fix_box(0);
-			box.oRect.x += coords(1);
-			grid_fix_box(boxColor);
-			grid_fix_player(1);
-		}
-		else if (box.oRect.x == coords(15) && player.oRect.y == box.oRect.y && player.oRect.x == box.oRect.x)
-		{
-			player.oRect.x -= coords(1);
-			grid_fix_box(boxColor);
-			grid_fix_player(1);
-		}
+
+		grid[y][x + 1] = grid[y][x];
+
+		break;
+	}
+}
+
+void boxNum(int num, int y, int x)
+{
+	switch (num)
+	{
+	case 2:
+		box.oRect.y = coords(y);
+		box.oRect.x = coords(x);
 		break;
 	}
 }
@@ -222,9 +271,7 @@ bool lvl1()
 	player.oRect.y = coords(5);
 
 	grid[5][1] = 1;
-
-	grid[5][5] = 5;
-	grid[5][10] = 3;
+	grid[5][5] = 2;
 
 	stamina = 50;
 	return complete;

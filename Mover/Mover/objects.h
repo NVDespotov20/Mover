@@ -19,6 +19,8 @@ bool onSquare(objRect Box, objRect Square);
 void moves(char direction);
 void grid_fix_box(int num);
 void grid_fix_player(int num);
+void boxNum(int num, int y, int x);
+void fix(int y, int x, char direction);
 
 int grid_check(int check);
 extern int boxColor;
