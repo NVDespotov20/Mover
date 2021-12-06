@@ -38,7 +38,17 @@ int coords(int grid);
 extern objRect background;
 extern objRect player;
 extern objRect box;
-extern objRect square;
+extern objRect boxY;
+extern objRect boxG;
+extern objRect boxT;
+extern objRect boxR;
+extern objRect boxB;
+extern objRect squareY;
+extern objRect squareG;
+extern objRect squareT;
+extern objRect squareR;
+extern objRect squareB;
+extern objRect squareRB;
 
 extern int stamina;
 extern objRect Stamina;

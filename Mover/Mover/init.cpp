@@ -9,8 +9,18 @@ objRect background(coords(0), coords(0), scrWidth, scrHeight);
 objRect player(coords(7), coords(5), 64, 64);
 
 objRect box(coords(5), coords(5), 64, 64);
+objRect boxY(coords(5), coords(5), 64, 64);
+objRect boxG(coords(6), coords(5), 64, 64);
+objRect boxT(coords(7), coords(5), 64, 64);
+objRect boxR(coords(8), coords(5), 64, 64);
+objRect boxB(coords(9), coords(5), 64, 64);
 
-objRect square(coords(10), coords(6), 64, 64);
+objRect squareY(coords(10), coords(5), 64, 64);
+objRect squareG(coords(10), coords(5), 64, 64);
+objRect squareT(coords(10), coords(5), 64, 64);
+objRect squareR(coords(10), coords(5), 64, 64);
+objRect squareB(coords(10), coords(5), 64, 64);
+objRect squareRB(coords(10), coords(5), 64, 64);
 
 int stamina = 100;
 
@@ -119,41 +129,41 @@ void render(char direction)
 				}
 				break;
 			case 2:
-				loadTexture("images/boxes/boxY.png", box);
+				loadTexture("images/boxes/boxY.png", boxY);
 				break;
 			case 3:
-				loadTexture("images/boxes/boxG.png", box);
+				loadTexture("images/boxes/boxG.png", boxG);
 				break;
 			case 4:
-				loadTexture("images/boxes/boxT.png", box);
+				loadTexture("images/boxes/boxT.png", boxT);
 				break;
 			case 5:
-				loadTexture("images/boxes/boxR.png", box);
+				loadTexture("images/boxes/boxR.png", boxR);
 				break;
 			case 6:
-				loadTexture("images/boxes/boxB.png", box);
+				loadTexture("images/boxes/boxB.png", boxB);
 				break;
 			case 7:
 				loadTexture("images/boxes/box.png", box);
 				break;
 				/////////////////////////////////////////////
 			case 8:
-				loadTexture("images/squares/squareY.png", square);
+				loadTexture("images/squares/squareY.png", squareY);
 				break;
 			case 9:
-				loadTexture("images/squares/squareG.png", square);
+				loadTexture("images/squares/squareG.png", squareG);
 				break;
 			case 10:
-				loadTexture("images/squares/squareT.png", square);
+				loadTexture("images/squares/squareT.png", squareT);
 				break;
 			case 11:
-				loadTexture("images/squares/squareR.png", square);
+				loadTexture("images/squares/squareR.png", squareR);
 				break;
 			case 12:
-				loadTexture("images/squares/squareB.png", square);
+				loadTexture("images/squares/squareB.png", squareB);
 				break;
 			case 13:
-				loadTexture("images/squares/squareRB.png", square);
+				loadTexture("images/squares/squareRB.png", squareRB);
 				break;
 			}
 		}

@@ -16,7 +16,7 @@ public:
 };
 
 bool onSquare(objRect Box, objRect Square);
-void moves(char direction);
+void moves(char direction, int y, int x);
 void grid_fix_box(int num);
 void grid_fix_player(int num);
 void boxNum(int num, int y, int x);
